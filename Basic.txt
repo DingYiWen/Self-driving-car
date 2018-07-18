@@ -1,0 +1,13 @@
+for episode in range(1):
+    env_info = env.reset(train_mode=train_mode)[default_brain]
+    done = False
+    episode_rewards = 0
+    while not done:
+        if brain.vector_action_space_type == 'continuous':
+            env_info = env.step([1,0,0])[default_brain]
+        else:
+            env_info = env.step([1])[default_brain]
+        episode_rewards += env_info.rewards[0]
+        print("Agent state looks like: \n{}".format(env_info.vector_observations[0]))
+        done = env_info.local_done[0]
+    print("Total reward this episode: {}".format(episode_rewards))
